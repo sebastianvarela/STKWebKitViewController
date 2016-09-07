@@ -88,7 +88,11 @@
         [self.view addSubview:_webView];
     }
     return self;
+}
 
+- (void)dealloc
+{
+    self.delegate = nil;
 }
 
 - (UIImage *)imageNamed:(NSString *)imageName{
@@ -272,6 +276,15 @@
 -(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
     [self.webView.scrollView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO]; //otherwise top of website is sometimes hidden under Navigation Bar
+
+    if (self.delegate)
+        [self.delegate stkWebKitViewControllerFinishLoadingWebPage:self];
+}
+
+- (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation
+{
+    if (self.delegate)
+        [self.delegate stkWebKitViewControllerStartLoadingWebPage:self];
 }
 
 @end

@@ -7,6 +7,7 @@
 //
 #import <WebKit/WebKit.h>
 #import "STKWebKitModalViewController.h"
+#import "STKWebKitViewControllerDelegate.h"
 
 #ifndef __IPHONE_8_0
 #warning "This project uses features only available in iOS SDK 8.0 and later."
@@ -47,4 +48,7 @@ typedef enum {
 
 /*** use this to specify schemes that should be handled directly by the app ***/
 @property (strong, nonatomic) NSArray *customSchemes;
+
+@property (nonatomic, strong) id <STKWebKitViewControllerDelegate> delegate;
+
 @end
